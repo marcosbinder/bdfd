@@ -1,0 +1,172 @@
+$c[AINDA NAO FORMATADO ! NAO DISPONIVEL PRA USO !]
+
+
+$elseif[$customID==abrir]
+$defer
+
+ $if[$getUserVar[ponto]==false]
+$setUserVar[ultimoponto;$getTimestamp]
+ $setUserVar[ponto;$getTimestamp]
+ $setUserVar[pontosabertos;$getUserVar[pontosabertos;$botOwnerID]
+ <@$authorID>;$botOwnerID]
+ $sendEmbedMessage[1268734494077091973;;Voltou bate ponto ;; O usuário <@$authorID> voltou o bate-ponto <t:$getTimestamp:R>.;876252;@$username;$authorAvatar;Hyper • @marcosbinder • @fireflay022;$serverIcon;$authorAvatar;;yes;no]
+ $thumbnail[$serverIcon]
+ $footer[Hyper Bot • @marcosbinder • @fireflay022 • @towrns]
+ $addTimestamp
+ $color[50637d]
+ $title[📝 Ponto Staff - Hyper Network] 
+
+   $description[ 👋 Olá! Como parte da equipe staff, você precisa bater ponto. Se quiser ver seu tempo de ponto, clique abaixo.
+***Pessoas com ponto aberto agora:*** 
+   $getUserVar[pontosabertos;$botOwnerID]
+
+ Para ser mais eficiente, clique no painel abaixo para fazer isso: 
+ 
+]
+ $else
+ Você já tem um ponto aberto, que a propósito foi aberto <t:$getUserVar[ponto]:R>. Clique abaixo para ver mais.
+  $ephemeral $removeAllComponents 
+ $addButton[yes;informações;Ver Informações;secondary;no;<:n_patch:1272313165191057481>]
+ $endif
+$elseif[$customID==fechar]
+   $if[$getUserVar[ponto]!=false]
+   
+   
+$setUserVar[ultimoponto;$getTimestamp]
+$var[tempoponto;$sub[$getTimestamp;$getUserVar[ponto]]]
+$setUserVar[tempomensal;$sum[$getUserVar[tempomensal];$var[tempoponto]]]
+$setUserVar[tempototal;$sum[$getUserVar[tempototal];$var[tempoponto]]]
+
+$var[tempoagora;]
+$var[calculo1;$var[tempoponto]]
+$if[$var[calculo1]>=3600]
+$var[Horas;$calculate[$var[calculo1]/3600]]
+$var[tempoagora; $var[Horas] Horas,]
+$endif
+$if[$var[calculo1]>=60]
+$var[Minutos;$calculate[$modulo[$var[calculo1];3600]/60]]
+$var[tempoagora; $var[tempoagora] $var[Minutos] minutos e]
+$endif
+$var[segundos;$modulo[$var[calculo1];60]]
+$var[tempoagora; $var[tempoagora] $var[segundos] segundos]
+
+$var[tempomensal_texto;]
+$var[calculo2;$getUserVar[tempomensal]]
+$if[$var[calculo2]>=3600]
+$var[Horas;$calculate[$var[calculo2]/3600]]
+$var[tempomensal_texto; $var[Horas] Horas,]
+$endif
+$if[$var[calculo2]>=60]
+$var[Minutos;$calculate[$modulo[$var[calculo2];3600]/60]]
+$var[tempomensal_texto; $var[tempomensal_texto] $var[Minutos] minutos e]
+$endif
+$var[segundos;$modulo[$var[calculo2];60]]
+$var[tempomensal_texto; $var[tempomensal_texto] $var[segundos] segundos]
+
+$var[tempototal_texto;]
+$var[calculo3;$getUserVar[tempototal]]
+$if[$var[calculo3]>=3600]
+$var[Horas;$calculate[$var[calculo3]/3600]]
+$var[tempototal_texto; $var[Horas] Horas,]
+$endif
+$if[$var[calculo3]>=60]
+$var[Minutos;$calculate[$modulo[$var[calculo3];3600]/60]]
+$var[tempototal_texto; $var[tempototal_texto] $var[Minutos] minutos e]
+$endif
+$var[segundos;$modulo[$var[calculo3];60]]
+$var[tempototal_texto; $var[tempototal_texto] $var[segundos] segundos]
+
+$setUserVar[ponto;false]
+$setUserVar[pontosabertos;$replaceText[$getUserVar[pontosabertos;$botOwnerID];<@$authorID>;;-1];$botOwnerID]
+$setUserVar[displayponto;$var[tempoagora]]
+$sendEmbedMessage[1268734494077091973;;Fechou bate ponto ;; O usuário <@$authorID> fechou o bate-ponto <t:$getTimestamp:R>.
+O usuário <@$authorID> fez **$var[tempoagora]** de bate-ponto agora.
+;876252;@$username;$authorAvatar;Hyper • @marcosbinder • @fireflay022;$serverIcon;$authorAvatar;;yes;no]
+$thumbnail[$serverIcon]
+$footer[Hyper Bot • @marcosbinder • @fireflay022 • @towrns]
+$addTimestamp
+$color[50637d]
+$title[📝 Ponto Staff - Hyper Network]
+   $if[$getUserVar[pontosabertos;$botOwnerID]==]
+
+$description[ 👋 Olá! Como parte da equipe staff, você precisa bater ponto. Se quiser ver seu tempo de ponto, clique abaixo.
+***Não há ninguém em bate-ponto agora.***
+O último staff a bater ponto foi <@$authorID>, com um total de **$var[tempoagora]**. ***SEJA O PRÓXIMO!***
+Para ser mais eficiente, clique no painel abaixo para fazer isso:
+
+]
+$else
+
+$description[ 👋 Olá! Como parte da equipe staff, você precisa bater ponto.
+
+Pessoas com ponto aberto agora:
+$getUserVar[pontosabertos;$botOwnerID]
+
+O último staff a bater ponto foi <@$authorID>, com um total de **$var[tempoagora]**. ***SEJA O PRÓXIMO!***
+
+Para ser mais eficiente, clique no painel abaixo para fazer isso:
+
+]
+$endif
+    $else 
+     Seu ponto já está fechado! Clique abaixo para ver mais.
+  $ephemeral $removeAllComponents 
+ $addButton[yes;informações;Ver Informações;secondary;no;<:n_patch:1272313165191057481>]
+ $endif
+ 
+$elseif[$customID==informações]
+$defer
+
+$ephemeral 
+$description[$customID]
+$thumbnail[$serverIcon]
+$footer[Hyper Bot • @marcosbinder • @fireflay022 • @towrns]
+$addTimestamp
+$color[50637d]
+$title[📝 Ponto Staff - Hyper Network]
+$description[Informações sobre os Ponto Staff abaixo:]
+$removeAllComponents
+
+
+$var[tempomensal_texto;]
+$var[calculo2;$getUserVar[tempomensal]]
+$if[$var[calculo2]>=3600]
+$var[Horas;$calculate[$var[calculo2]/3600]]
+$var[tempomensal_texto; $var[Horas] Horas,]
+$endif
+$if[$var[calculo2]>=60]
+$var[Minutos;$calculate[$modulo[$var[calculo2];3600]/60]]
+$var[tempomensal_texto; $var[tempomensal_texto] $var[Minutos] minutos e]
+$endif
+$var[segundos;$modulo[$var[calculo2];60]]
+$var[tempomensal_texto; $var[tempomensal_texto] $var[segundos] segundos]
+
+$var[tempototal_texto;]
+$var[calculo3;$getUserVar[tempototal]]
+$if[$var[calculo3]>=3600]
+$var[Horas;$calculate[$var[calculo3]/3600]]
+$var[tempototal_texto; $var[Horas] Horas,]
+$endif
+$if[$var[calculo3]>=60]
+$var[Minutos;$calculate[$modulo[$var[calculo3];3600]/60]]
+$var[tempototal_texto; $var[tempototal_texto] $var[Minutos] minutos e]
+$endif
+$var[segundos;$modulo[$var[calculo3];60]]
+$var[tempototal_texto; $var[tempototal_texto] $var[segundos] segundos]
+
+   $if[$getUserVar[pontosabertos;$botOwnerID]==]
+  
+$addField[Staffs em trabalho:;Nenhum!]
+   $else 
+$addField[Staffs em trabalho:;$getUserVar[pontosabertos;$botOwnerID]]
+   $endif
+   
+$addField[Seu tempo de trabalho:;
+Seu tempo mensal foi de ***$var[tempomensal_texto]***
+Seu tempo total foi de ***$var[tempototal_texto]***
+]
+$if[$sub[$getTimestamp;$getUserVar[ultimoponto]]>=604800]
+$addField[PONTO ATRASADO; Faz mais de uma semana que você não faz bate-ponto. Seu último bate-ponto foi <t:$getUserVar[ultimoponto]:R>.]
+$else 
+$addField[Ponto em dia!; Faz menos de uma semana que você fez bate-ponto. Seu último bate-ponto foi <t:$getUserVar[ultimoponto]:R>.]
+$endif
