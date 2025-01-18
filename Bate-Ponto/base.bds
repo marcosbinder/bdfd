@@ -1,0 +1,18 @@
+$nomention
+$c[
+╟─ Leia as informações abaixo! ─╢
+
+O seu bot precisa ter permissão para falar no canal que você quer que fique este painel. Basaicamente, ele cria uma embed com botões que irão marcar o tempo do ponto.
+
+╟─ Leia as informações acima! ─╢
+]
+$c[╟─ Estética ─╢
+Tudo isso abaixo é customizável.]
+$thumbnail[$serverIcon] $addTimestamp $color[50637d] 
+$title[📝 Bate Ponto - $serverName[$guildID]]
+$footer[@$username[$botOwnerID - @$username[$findUser[659214571634032667]]
+$description[👋 Olá! Para bater ponto, clique nos botões abaixo:]
+$c[╟─ Botões ─╢]
+$addButton[no;abrir;Abrir ponto;success;no;🔓] $c[Botão pra abrir o ponto (começar)]
+$addButton[no;fechar;Fechar ponto;danger;no;🔒] $c[Botão pra fechar o ponto (parar)]
+$addButton[yes;informações;Ver Informações;secondary;no] $c[Botão pra ver quanto tempo de ponto você fez de ponto.]
